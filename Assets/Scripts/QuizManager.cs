@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class QuizManager : MonoBehaviour
@@ -98,9 +99,9 @@ public class QuizManager : MonoBehaviour
     }
 
     // move to main menu scene
-    public void MainMenu()
+    public void ToMainMenu()
     {
-
+        SceneManager.LoadScene("MainMenu");
     }
 
 #endregion
