@@ -9,6 +9,7 @@ public class QuizManager : MonoBehaviour
 {
     [Header("UI Name Input")]
     public GameObject nameInputUI;
+    public TMP_InputField inputFieldName;
 
     [Header("UI Quiz")]
     public GameObject quizUI;
@@ -28,6 +29,7 @@ public class QuizManager : MonoBehaviour
     public GameObject leaderboardUI;
 
     [Header("Debug")]
+    public string username;
     public int currentQuestion;
     public int numberOfQuestion;
     public int numberOfCorrect;
@@ -48,6 +50,7 @@ public class QuizManager : MonoBehaviour
 
     public void StartQuiz()
     {
+        username = inputFieldName.text;
         currentQuestion = 0;
         numberOfQuestion = questions.Count;
         numberOfCorrect = 0;

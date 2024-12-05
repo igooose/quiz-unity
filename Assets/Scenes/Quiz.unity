@@ -4087,6 +4087,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameInputUI: {fileID: 1777861014}
+  inputFieldName: {fileID: 390897374}
   quizUI: {fileID: 570532339}
   questionImage: {fileID: 708859529}
   questionText: {fileID: 1519493202}
@@ -4098,6 +4099,7 @@ MonoBehaviour:
   correctionHeaderText: {fileID: 739430136}
   correctAnswerText: {fileID: 483933562}
   leaderboardUI: {fileID: 1292119002}
+  username: 
   currentQuestion: 0
   numberOfQuestion: 0
   numberOfCorrect: 0
@@ -5222,7 +5224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1777861015
 RectTransform:
   m_ObjectHideFlags: 0
