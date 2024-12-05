@@ -107,13 +107,25 @@ public class QuizManager : MonoBehaviour
 
     private void UpdateQuestion()
     {
-        Question currentSoal = questions[currentQuestion];
-        questionImage.texture = currentSoal.imageQuestion.texture;
-        questionText.text = currentSoal.textQuestion;
-        optionAText.text = currentSoal.textOptionA;
-        optionBText.text = currentSoal.textOptionB;
-        optionCText.text = currentSoal.textOptionC;
-        optionDText.text = currentSoal.textOptionD;
+        // set as current question
+        Question question = questions[currentQuestion];
+
+        if(question.imageQuestion != null)
+        {
+            questionImage.gameObject.SetActive(true);
+            questionImage.texture = question.imageQuestion.texture;
+        }
+        else
+        {
+            questionImage.gameObject.SetActive(false);
+        }
+
+        questionText.text = question.textQuestion;
+
+        optionAText.text = question.textOptionA;
+        optionBText.text = question.textOptionB;
+        optionCText.text = question.textOptionC;
+        optionDText.text = question.textOptionD;
     }
 
     private void CheckAnswer(AnswerOption option)
