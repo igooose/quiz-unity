@@ -7,6 +7,8 @@ using TMPro;
 
 public class QuizManager : MonoBehaviour
 {
+    public LeaderboardManager leaderboardManager;
+
     [Header("UI Name Input")]
     public GameObject nameInputUI;
     public TMP_InputField inputFieldName;
@@ -27,13 +29,15 @@ public class QuizManager : MonoBehaviour
 
     [Header("UI Leadboard")]
     public GameObject leaderboardUI;
+    public Transform scoreContentContainer;
+    public GameObject scoreContentTemp;
 
     [Header("Debug")]
-    public string username;
-    public int currentQuestion;
-    public int numberOfQuestion;
-    public int numberOfCorrect;
-    public float score;
+    [SerializeField] private string username;
+    [SerializeField] private int currentQuestion;
+    [SerializeField] private int numberOfQuestion;
+    [SerializeField] private int numberOfCorrect;
+    [SerializeField] private int score;
 
     [Header("Question List")]
     public List<Question> questions = new List<Question>();
@@ -86,13 +90,30 @@ public class QuizManager : MonoBehaviour
     {
         currentQuestion++;
 
+        // show leaderboard
         if (currentQuestion >= questions.Count)
         {
+            leaderboardManager.AddEntry(username, score);
+            leaderboardManager.SaveLeaderboard();
+
+            Leaderboard leaderboard = leaderboardManager.LoadLeaderboard();
+
+            int rankCount = 1;
+            foreach (LeaderboardEntry entry in leaderboard.entries)
+            {
+                GameObject scoreContent = Instantiate(scoreContentTemp, scoreContentContainer);
+                scoreContent.transform.Find("Text Rank").GetComponent<TMP_Text>().text = rankCount.ToString();
+                scoreContent.transform.Find("Text Name").GetComponent<TMP_Text>().text = entry.name;
+                scoreContent.transform.Find("Text Score").GetComponent<TMP_Text>().text = entry.score.ToString();
+                rankCount++;
+            }
+
             nameInputUI.SetActive(false);
             quizUI.SetActive(false);
             correctionUI.SetActive(false);
             leaderboardUI.SetActive(true);
         }
+        // show next question
         else
         {
             UpdateQuestion();
@@ -148,7 +169,7 @@ public class QuizManager : MonoBehaviour
             Debug.Log("Wrong!");
         }
 
-        score = (float)numberOfCorrect / (float)numberOfQuestion * (float)100;
+        score = Mathf.RoundToInt((float)numberOfCorrect / (float)numberOfQuestion * (float)100);
         Debug.Log($"Current Score: {score}");
 
         // show correction UI
